@@ -5,3 +5,33 @@ A dicussion revealed soruce data headings have been imported with inappropriate 
 
 ## Motivation
 I developed this tool in my spare time, which gave the team a faster method to review and correct the input data
+
+## Journal
+This table is upadted for each push and shows insights to the discussion, analysis and specification that we are building in to the tool
+
+|| Date	|| Discussion|| Analysis|| Feature to add || Push || Date completed ||
+| | | | | | |
+| | | | | | |
+| | | | | | |
+| | | | | | |
+| | | | | | |
+| | | | | | |
+| | | | | | |
+| | | | | | |
+| | | | | | |
+| | | | | | |
+| | | | | | |
+| | | | | | |
+| | | | | | |
+| | | | | | |
+| | | | | | |
+| | | | | | |
+| | | | | | |
+| | | | | | |
+| | | | | | |
+| | | | | | |
+| | | | | | |
+| | | | | | |
+| | | | | | |
+| | | | | | |
+| | | | | | |
