@@ -14,7 +14,8 @@ This table is updated for each push and shows insights to the discussion, analys
 
 | Journal Id    | Date      | Discussion |  Date completed |
 | :-----------: | :-------: | ---        |  ---            | 
-| 1             | 23 Jul 22 | Source Data headers contain incorrect characters or are too long |  | |
+| 1             | 23 Jul 22 | Source Data headers contain incorrect characters or are too long | 25 jul 22 |
+| 2             | 25 Jul 22 | Scan rows for control condition | |
 
 ## Full Journal
 
@@ -48,7 +49,7 @@ To implement the above, there needs to be a means of
 excel sheets start Row=1 Column=1
 
 #### Assumptions
-Initial code will assume source data starts at Row=1 Column=1
+excel sheets start Row=1 Column=1
 
 #### Features identified
 1. Open a mapping file, read the mapping names, display in a listbox
@@ -56,4 +57,30 @@ Initial code will assume source data starts at Row=1 Column=1
 3. User configuraiton component reads from excel sheet
 
 #### Dev Notes
-*
+All functions tested using a local worksheet. 
+Caveat - remote connection/dwonload is not considered in the testing
+
+
+## Journal Id 2. Source Data headers contain incorrect characters or are too long
+#### Discussion
+Next issue is to run down a control column and collect all the key column data as a collection, followed by removing any blanks (compacting)
+
+#### Analysis
+must hand in multiple values and have similar approach to the previous work.
+
+#### Solution outline
+while loop <> key value
+	if cell(row, controlcol) == stop then exit
+	increment row
+wend
+
+#### Constraints
+excel sheets start Row=1 Column=1
+
+#### Assumptions
+excel sheets start Row=1 Column=1 as defaults
+
+#### Features identified
+scan rows until key or control stop condition
+
+#### Dev Notes
