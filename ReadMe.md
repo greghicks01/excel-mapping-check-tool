@@ -15,7 +15,8 @@ This table is updated for each push and shows insights to the discussion, analys
 | Journal Id    | Date      | Discussion |  Date completed |
 | :-----------: | :-------: | ---        |  ---            | 
 | 1             | 23 Jul 22 | Source Data headers contain incorrect characters or are too long | 25 jul 22 |
-| 2             | 25 Jul 22 | Scan rows for control condition | |
+| 2             | 25 Jul 22 | Scan rows for control condition | 25 Jul 22 |
+| 3             | 26 jul 22 | File Picker Dialog with options | 26 Jul 22 |
 
 ## Full Journal
 
@@ -61,7 +62,7 @@ All functions tested using a local worksheet.
 Caveat - remote connection/dwonload is not considered in the testing
 
 
-## Journal Id 2. Source Data headers contain incorrect characters or are too long
+## Journal Id 2. Scan rows for control condition
 #### Discussion
 Next issue is to run down a control column and collect all the key column data as a collection, followed by removing any blanks (compacting)
 
@@ -84,3 +85,31 @@ excel sheets start Row=1 Column=1 as defaults
 scan rows until key or control stop condition
 
 #### Dev Notes
+a little tech debt in comments to fox
+identified a refactoring of the range checking iif into a consolidated function (maintenance)
+
+
+## Journal Id 3. File Picker with default XL and CSV options
+#### Discussion
+The user will need to pick a either a single mapping file or a set of data files
+
+#### Analysis
+use the built in dialog and make most items available as parameters
+
+#### Solution outline
+wrap the dialog in s function and pass params to make it flexable
+ensure that one data type is returned, preferrably iterator type to catch cancel condition (ie empty set)
+
+#### Constraints
+excel sheets start Row=1 Column=1
+
+#### Assumptions
+excel sheets start Row=1 Column=1 as defaults
+
+#### Features identified
+Give the dialog a title to give a user a clue what is to be picked
+drive single or mulitple selects to ease picking the files
+
+#### Dev Notes
+Feature added and unit tested with all passes
+Refacting improved the maintenance on the range checking
