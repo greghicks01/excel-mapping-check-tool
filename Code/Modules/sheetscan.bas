@@ -4,6 +4,13 @@ Const defaultStopCondition As String = ""
 Const defaultStartRow As Integer = 1
 Const defaultStartCol As Integer = 1
 
+' Enum to allow a single range check with optional param
+' to pick max range values in row or columns
+Enum RowOrColumnWise
+    Row
+    Column
+End Enum
+
 '
 ' Purpose:
 ' Accepts:
@@ -18,11 +25,10 @@ Const defaultStartCol As Integer = 1
 ' startCol As Integer default or user controlled starting column for scan
 '
 
-
 '
 ' Purpose: column wise scan for a condition
-' Accepts:
-' Returns:
+' Accepts: common params above
+' Returns: column as an integer to show where key was found
 Public Function scanColumnsForKeyOrConditionFound( _
                                                     ByRef ws As Worksheet, _
                                                     ByVal key As String, _
@@ -36,8 +42,7 @@ Public Function scanColumnsForKeyOrConditionFound( _
     currentStopCondition = stopCondition
 
     ' trap out of bounds conditions
-    If IIf(currentRow < 1, True, IIf(currentRow > 1048576, True, False)) Then Err.Raise 9
-    If IIf(currentCol < 1, True, IIf(currentCol > 16384, True, False)) Then Err.Raise 9
+     If Not sheetRangeCheck(currentRow) Or Not sheetRangeCheck(currentCol, Column) Then Err.Raise 9
     If key = "" Then Err.Raise 9
                                            
     With ws
@@ -47,7 +52,7 @@ Public Function scanColumnsForKeyOrConditionFound( _
             If .Cells(currentRow, currentCol) = currentStopCondition Then Exit Function
             currentCol = currentCol + 1
             'trap out of bounds
-            If (currentCol > 16384) Then Err.Raise 9
+            If Not sheetRangeCheck(currentCol, Column) Then Err.Raise 9
             
         Wend
         
@@ -58,24 +63,23 @@ Public Function scanColumnsForKeyOrConditionFound( _
 End Function
 
 '
-' Purpose: column wise scan for a condition
-' Accepts:
-' Returns:
+' Purpose: row wise scan for a condition
+' Accepts: common params above
+' Returns: column as an integer to show where key was found
 Public Function scanRowsForKeyOrConditionFound( _
-                                                    ByRef ws As Worksheet, _
-                                                    ByVal key As String, _
-                                                    Optional ByVal stopCondition As String = defaultStopCondition, _
-                                                    Optional ByVal startRow As Integer = defaultStartRow, _
-                                                    Optional ByVal startCol As Integer = defaultStartCol _
-                                                 ) As Integer
+                                                ByRef ws As Worksheet, _
+                                                ByVal key As String, _
+                                                Optional ByVal stopCondition As String = defaultStopCondition, _
+                                                Optional ByVal startRow As Integer = defaultStartRow, _
+                                                Optional ByVal startCol As Integer = defaultStartCol _
+                                              ) As Integer
     currentKey = key
     currentRow = startRow
     currentCol = startCol
     currentStopCondition = stopCondition
 
     ' trap out of bounds conditions
-    If IIf(currentRow < 1, True, IIf(currentRow > 1048576, True, False)) Then Err.Raise 9
-    If IIf(currentCol < 1, True, IIf(currentCol > 16384, True, False)) Then Err.Raise 9
+    If Not sheetRangeCheck(currentRow) Or Not sheetRangeCheck(currentCol, Column) Then Err.Raise 9
     If key = "" Then Err.Raise 9
                                            
     With ws
@@ -86,7 +90,7 @@ Public Function scanRowsForKeyOrConditionFound( _
             
             currentRow = currentRow + 1
             'trap out of bounds
-            If (currentRow > 1048576) Then Err.Raise 9
+            If Not sheetRangeCheck(currentRow) Then Err.Raise 9
             
         Wend
         
@@ -107,16 +111,16 @@ Public Function scanRowsForKeysUntilConditionFound( _
                                                     Optional ByVal startCol As Integer = defaultStartCol, _
                                                     Optional ByVal controlCol As Integer = defaultStartCol _
                                                   ) As Collection
+
     Dim c As New Collection
-    
+
     currentRow = startRow
     currentCol = startCol
     currentControlCol = controlCol
     currentStopCondition = stopCondition
-    
+
     ' trap out of bounds conditions
-    If IIf(currentRow < 1, True, IIf(currentRow > 1048576, True, False)) Then Err.Raise 9
-    If IIf(currentCol < 1, True, IIf(currentCol > 16384, True, False)) Then Err.Raise 9
+    If Not sheetRangeCheck(currentRow) Or Not sheetRangeCheck(currentCol, Column) Then Err.Raise 9
     
     With ws
         
@@ -128,7 +132,7 @@ Public Function scanRowsForKeysUntilConditionFound( _
             
             currentRow = currentRow + 1
             'trap out of bounds
-            If (currentRow > 1048576) Then Err.Raise 9
+            If Not sheetRangeCheck(currentRow) Then Err.Raise 9
             
         Wend
         
@@ -136,4 +140,23 @@ Public Function scanRowsForKeysUntilConditionFound( _
     
     End With
 
+End Function
+
+'
+' Purpose: Range checks incoming values, easier to maintain in the longer run
+' Accepts: the index to check and the option Row or Column used to pick the maximum value
+' Returns: True is in Range, False if out of range
+Public Function sheetRangeCheck(ByVal idx As Integer, Optional rowCol As RowOrColumnWise = Row) As Boolean
+
+    Select Case rowCol
+        Case RowOrColumnWise.Row
+            maxVal = 1048576
+            
+        Case RowOrColumnWise.Column
+            maxVal = 16384
+            
+    End Select
+    
+    sheetRangeCheck = IIf(idx >= 1 And idx <= maxVal, True, False)
+    
 End Function
