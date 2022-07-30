@@ -17,6 +17,7 @@ This table is updated for each push and shows insights to the discussion, analys
 | 1             | 23 Jul 22 | Source Data headers contain incorrect characters or are too long | 25 jul 22 |
 | 2             | 25 Jul 22 | Scan rows for control condition | 25 Jul 22 |
 | 3             | 26 jul 22 | File Picker Dialog with options | 26 Jul 22 |
+| 4             | 30 Jul 22 | read map in to ui form list | |
 
 ## Full Journal
 
@@ -61,8 +62,10 @@ excel sheets start Row=1 Column=1
 All functions tested using a local worksheet. 
 Caveat - remote connection/dwonload is not considered in the testing
 
+==========================================================================
 
 ## Journal Id 2. Scan rows for control condition
+
 #### Discussion
 Next issue is to run down a control column and collect all the key column data as a collection, followed by removing any blanks (compacting)
 
@@ -88,8 +91,10 @@ scan rows until key or control stop condition
 a little tech debt in comments to fox
 identified a refactoring of the range checking iif into a consolidated function (maintenance)
 
+==========================================================================
 
 ## Journal Id 3. File Picker with default XL and CSV options
+
 #### Discussion
 The user will need to pick a either a single mapping file or a set of data files
 
@@ -113,3 +118,52 @@ drive single or mulitple selects to ease picking the files
 #### Dev Notes
 Feature added and unit tested with all passes
 Refacting improved the maintenance on the range checking
+
+==========================================================================
+
+## Journal Id 4. Read map data into UI form list
+
+#### Discussion
+The need to display data for visual reference to the end user requires a UI
+
+VBA UI's have a limited set of elements. List elements include listbox and combo box
+
+#### Analysis
+We will need to load data into other lists/combos so a generic load is useful here. We are already extracting most data in a collection due to the ease of iteration, so we will continue the pattern
+
+#### Solution outline
+generic list loader for any UI object of List or combo
+
+a UI with one LB for this features
+
+#### Constraints
+VBA is not good with UI objects as COntrol althougt this is more correct, its not always usable in a generic to pass the element
+
+#### Assumptions
+the UI is valid when we load the data
+
+#### Features identified
+* UI with one ListBox
+* Generic list loader (for both LB and CB)
+
+#### Dev Notes
+
+==========================================================================
+
+## Journal Id X. xxxx
+
+#### Discussion
+
+#### Analysis
+
+#### Solution outline
+
+#### Constraints
+
+#### Assumptions
+
+#### Features identified
+
+#### Dev Notes
+
+==========================================================================
