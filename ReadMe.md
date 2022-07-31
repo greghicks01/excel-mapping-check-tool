@@ -19,6 +19,7 @@ This table is updated for each push and shows insights to the discussion, analys
 | 3             | 26 Jul 22 | File Picker Dialog with options | 26 Jul 22 |
 | 4             | 30 Jul 22 | read map in to ui form list     | 30 Jul 22 |
 | 5             | 31 Jul 22 | Read user config in workbook	  | 31 Jul 22 |
+| 6             | 31 Jul 22 | read data into list on form     | |
 
 ## Full Journal
 
@@ -172,6 +173,29 @@ call getConfigValue taking one value for the key
 
 #### Dev Notes
 test harnes to demo the outcome was achieved
+
+==========================================================================
+
+## Journal Id 6. Read data into form list
+
+#### Discussion
+The user form from id 4 is being extended to add a new element for the data headers
+
+#### Analysis
+per the pattern established in this code, collections will b used to gather the desired headers
+
+#### Solution outline
+we need a columnwise collection gathering code base and re-use the listFromCollection cdoe
+
+#### Constraints
+
+#### Assumptions
+
+#### Features identified
+Display the header data to the user on a second list box
+
+#### Dev Notes
+
 ==========================================================================
 
 ## Journal Id X. xxxx
@@ -191,3 +215,4 @@ test harnes to demo the outcome was achieved
 #### Dev Notes
 
 ==========================================================================
+

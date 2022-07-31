@@ -36,6 +36,7 @@ Public Function scanColumnsForKeyOrConditionFound( _
                                                     Optional ByVal startRow As Integer = defaultStartRow, _
                                                     Optional ByVal startCol As Integer = defaultStartCol _
                                                  ) As Integer
+    'Isolate the incoming values exept the byREF
     currentKey = key
     currentRow = startRow
     currentCol = startCol
@@ -63,6 +64,43 @@ Public Function scanColumnsForKeyOrConditionFound( _
 End Function
 
 '
+' Purpose: column wise collection of headers
+' Accepts: common params above
+' Returns: column as an integer to show where key was found
+Public Function scanColumnsConditionFound( _
+                                                    ByRef ws As Worksheet, _
+                                                    Optional ByVal stopCondition As String = defaultStopCondition, _
+                                                    Optional ByVal startRow As Integer = defaultStartRow, _
+                                                    Optional ByVal startCol As Integer = defaultStartCol _
+                                                 ) As Collection
+    'Isolate the incoming values exept the byREF
+    currentRow = startRow
+    currentCol = startCol
+    currentStopCondition = stopCondition
+    
+    Dim c As New Collection
+
+    ' trap out of bounds conditions
+    If Not sheetRangeCheck(currentRow) Or Not sheetRangeCheck(currentCol, RowOrColumnWise.Column) Then Err.Raise 9
+                                           
+    With ws
+    
+        While .Cells(currentRow, currentCol) <> currentStopCondition
+            
+            c.Add .Cells(currentRow, currentCol)
+            currentCol = currentCol + 1
+            'trap out of bounds
+            If Not sheetRangeCheck(currentCol, Column) Then Err.Raise 9
+            
+        Wend
+    
+    End With
+    
+    Set scanColumnsConditionFound = c
+
+End Function
+
+'
 ' Purpose: row wise scan for a condition
 ' Accepts: common params above
 ' Returns: column as an integer to show where key was found
@@ -73,6 +111,7 @@ Public Function scanRowsForKeyOrConditionFound( _
                                                 Optional ByVal startRow As Integer = defaultStartRow, _
                                                 Optional ByVal startCol As Integer = defaultStartCol _
                                               ) As Integer
+    'Isolate the incoming values exept the byREF
     currentKey = key
     currentRow = startRow
     currentCol = startCol
@@ -114,6 +153,7 @@ Public Function scanRowsForKeysUntilConditionFound( _
 
     Dim c As New Collection
 
+    'Isolate the incoming values exept the byREF
     currentRow = startRow
     currentCol = startCol
     currentControlCol = controlCol
@@ -146,7 +186,7 @@ End Function
 ' Purpose: Range checks incoming values, easier to maintain in the longer run
 ' Accepts: the index to check and the option Row or Column used to pick the maximum value
 ' Returns: True is in Range, False if out of range
-Public Function sheetRangeCheck(ByVal idx As Integer, Optional rowCol As RowOrColumnWise = Row) As Boolean
+Public Function sheetRangeCheck(ByVal idx As Integer, Optional rowCol As RowOrColumnWise = RowOrColumnWise.Row) As Boolean
 
     Select Case rowCol
         Case RowOrColumnWise.Row
