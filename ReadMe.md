@@ -16,8 +16,9 @@ This table is updated for each push and shows insights to the discussion, analys
 | :-----------: | :-------: | ---        |  ---            | 
 | 1             | 23 Jul 22 | Source Data headers contain incorrect characters or are too long | 25 jul 22 |
 | 2             | 25 Jul 22 | Scan rows for control condition | 25 Jul 22 |
-| 3             | 26 jul 22 | File Picker Dialog with options | 26 Jul 22 |
-| 4             | 30 Jul 22 | read map in to ui form list | |
+| 3             | 26 Jul 22 | File Picker Dialog with options | 26 Jul 22 |
+| 4             | 30 Jul 22 | read map in to ui form list     | 30 Jul 22 |
+| 5             | 31 Jul 22 | Read user config in workbook	  | 31 Jul 22 |
 
 ## Full Journal
 
@@ -148,6 +149,29 @@ the UI is valid when we load the data
 
 #### Dev Notes
 
+==========================================================================
+
+## Journal Id 5. Read user define config data
+
+#### Discussion
+User configuration reduces dependency on a developer to alter some parameters
+
+#### Analysis
+a config is really a key pair that the end user can maintain in a specific sheet
+
+#### Solution outline
+user a Key/Value approach to locate a named "key" to get to the value as a single call
+
+#### Constraints
+the usual constraint in excel
+
+#### Assumptions
+
+#### Features identified
+call getConfigValue taking one value for the key
+
+#### Dev Notes
+test harnes to demo the outcome was achieved
 ==========================================================================
 
 ## Journal Id X. xxxx
