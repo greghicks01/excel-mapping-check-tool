@@ -6,8 +6,22 @@ Sub testui()
     Set ws = ActiveWorkbook.Sheets("testmapload")
 
     ' this used the format in the existing sheet to execute the run
-    UserForm1.mapdata = sheetscan.scanRowsForKeysUntilConditionFound(ws, , 3, 2)
+    ufMapDataTool.mapdata = sheetscan.scanRowsForKeysUntilConditionFound(ws, , 3, 2)
     
-    UserForm1.Show
+    ufMapDataTool.Show
 
 End Sub
+
+Sub testdata()
+
+    Dim ws As Worksheet
+    
+    Set ws = ActiveWorkbook.Sheets("testdataload")
+
+    ' this used the format in the existing sheet to execute the run
+    ufMapDataTool.dataheaders = sheetscan.scanColumnsConditionFound(ws)
+    
+    ufMapDataTool.Show
+
+End Sub
+
