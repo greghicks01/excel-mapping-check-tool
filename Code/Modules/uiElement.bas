@@ -11,7 +11,7 @@ Sub loadListFromCollection(element As Object, C_data As Collection, Optional ByV
     element.Clear
 
     For Each c In C_data
-        If filter Then element.AddItem c
+        If filterValueByType Then element.AddItem c
     Next
     
     Application.EnableEvents = True
