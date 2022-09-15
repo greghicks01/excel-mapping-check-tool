@@ -19,7 +19,9 @@ This table is updated for each push and shows insights to the discussion, analys
 | 3             | 26 Jul 22 | File Picker Dialog with options | 26 Jul 22 |
 | 4             | 30 Jul 22 | read map in to ui form list     | 30 Jul 22 |
 | 5             | 31 Jul 22 | Read user config in workbook	  | 31 Jul 22 |
-| 6             | 31 Jul 22 | read data into list on form     | |
+| 6             | 31 Jul 22 | read data into list on form     | 31 Jul 22 |
+| 7             | 09 Aug 22 | finish filter, update comments, add named range management | 05 Aug 22 |
+| 8             | 04 Sep 22 |
 
 ## Full Journal
 
@@ -197,6 +199,54 @@ Display the header data to the user on a second list box
 #### Dev Notes
 
 ==========================================================================
+
+## Journal Id 7. finish filter, update comments, add named range management
+
+#### Discussion
+test filter code and reaction to changing selections
+Discussion with lead about conditions that impact on name ranges. There are references to cells, sheets and formula used.
+The ranges are removed when sending the workbooks attached to an email.
+
+#### Analysis
+Workbooks have a Names propery which contain the data we want to extract into plain text or a spare sheet for that purpose.
+
+#### Solution outline
+cannot leave a macro in the book to be sent.
+must allow a user to pick a file themselves
+both store and restore need to be robust against errors
+
+#### Constraints
+store data as text only 
+
+#### Assumptions
+Use existing patterns
+
+#### Features identified
+Use work book names and extract to a temp page
+
+#### Dev Notes
+
+==========================================================================
+
+
+## Journal Id X. xxxx
+
+#### Discussion
+
+#### Analysis
+
+#### Solution outline
+
+#### Constraints
+
+#### Assumptions
+
+#### Features identified
+
+#### Dev Notes
+
+==========================================================================
+
 
 ## Journal Id X. xxxx
 
